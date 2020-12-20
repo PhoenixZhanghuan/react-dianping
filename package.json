@@ -36,7 +36,9 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react": "^15.3.1",
+    "react-addons-perf": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-addons-pure-render-mixin": "^15.3.1"
   }
 }
