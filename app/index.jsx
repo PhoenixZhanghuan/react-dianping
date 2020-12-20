@@ -3,13 +3,7 @@ import { render } from 'react-dom'
 
 import './static/css/common.less'
 
-class Hello extends React.Component {
-    render() {
-        return (
-            <p>hello world</p>
-        )
-    }
-}
+import Hello from './containers/Hello';
 
 render(
     <Hello/>,
