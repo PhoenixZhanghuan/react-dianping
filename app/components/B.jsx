@@ -1,13 +1,11 @@
 import React from 'react'
 
-export default class B extends React.Component {
-
+class B extends React.Component {
     render() {
         return (
-            <p>
-                {this.props.userinfo.city}
-            </p>
-        );
+            <p>{this.props.userinfo.city}</p>
+        )
     }
-
 }
+
+export default B

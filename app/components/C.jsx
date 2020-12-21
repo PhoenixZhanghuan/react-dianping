@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-export default class C extends React.Component {
+class C extends React.Component {
     render() {
         return (
             <div>
@@ -8,12 +8,13 @@ export default class C extends React.Component {
             </div>
         )
     }
-
     changeUserInfo() {
-        const actions = this.props.actions;
+        const actions = this.props.actions
         actions.login({
             userid: '123',
             city: 'nanjing'
         })
     }
 }
+
+export default C
