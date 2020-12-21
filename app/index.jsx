@@ -1,12 +1,21 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-// 通用样式
 import './static/css/common.less'
-import {hashHistory} from 'react-router';
-import RouteMap from './router/routeMap';
+
+// 引用并执行 redux-demo
+import fn from './redux-demo.js'
+fn()
+
+class Hello extends React.Component {
+    render() {
+        return (
+            <p>hello world</p>
+        )
+    }
+}
 
 render(
-    <RouteMap hashHistory={hashHistory}/>,
+    <Hello/>,
     document.getElementById('root')
 )
