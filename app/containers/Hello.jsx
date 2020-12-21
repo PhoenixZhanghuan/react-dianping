@@ -7,8 +7,10 @@ import * as userinfoActions from '../actions/userinfo'
 import A from '../components/A'
 import B from '../components/B'
 import C from '../components/C'
+import {getData, postData} from '../fetch/test';
 
 class Hello extends React.Component {
+
     render() {
         return (
             <div>
@@ -28,6 +30,8 @@ class Hello extends React.Component {
             userid: 'abc',
             city: 'beijing'
         })
+
+        getData();
     }
 }
 
