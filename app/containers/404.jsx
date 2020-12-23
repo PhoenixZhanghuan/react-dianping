@@ -10,9 +10,9 @@ export default class NotFound extends React.Component {
 
     render() {
         return (
-            <div>
-
-            </div>
+            <h1>
+                404 not found page
+            </h1>
         );
     }
 

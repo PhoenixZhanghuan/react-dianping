@@ -1,18 +1,27 @@
-var pkg = require('./package.json')
-var path = require('path')
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
     app: path.resolve(__dirname, 'app/index.jsx'),
-    // 将 第三方依赖（node_modules中的） 单独打包
-    vendor: Object.keys(pkg.dependencies)
+    // 将 第三方依赖 单独打包
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'es6-promise',
+      'whatwg-fetch',
+      'immutable'
+    ]
   },
   output: {
     path: __dirname + "/build",
-    filename: "/js/[name].[chunkhash:8].js"
+    filename: "/js/[name].[chunkhash:8].js",
+    publicPath: '/'
   },
 
   resolve:{

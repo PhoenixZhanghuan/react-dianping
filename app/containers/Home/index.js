@@ -1,5 +1,6 @@
 import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
+import HomeHeader from "../../components/HomeHeader";
 
 export default class Home extends React.Component {
 
@@ -10,9 +11,9 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <h1>
-                hello world
-            </h1>
+            <div>
+                <HomeHeader />
+            </div>
         );
     }
 
