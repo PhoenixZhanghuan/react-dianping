@@ -7,15 +7,58 @@ export default class Category extends React.Component {
     constructor(props, context) {
         super(props, context)
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.state = {
+            index: 0
+        }
     }
 
     render() {
+        const opt = {
+            auto: 2000,
+            callback: (index) => {
+                this.setState({index})
+            }
+        };
         return (
-            <ReactSwipe >
-                <div>PAGE 1</div>
-                <div>PAGE 2</div>
-                <div>PAGE 3</div>
-            </ReactSwipe>
+            <div>
+                <ReactSwipe className="carousel" swipeOptions={opt}>
+                    <div>
+                        <ul>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                            <li>家政</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>火锅</li>
+                            <li>火锅</li>
+                            <li>火锅</li>
+                            <li>火锅</li>
+                            <li>火锅</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+
+                        </ul>
+                    </div>
+                </ReactSwipe>
+                <div>
+                    {this.state.index}
+                </div>
+            </div>
         );
     }
 
