@@ -1,28 +1,22 @@
 const app = require('koa')();
 const router = require('koa-router')();
-const koaBody = require('koa-body')();
 
-router.get('/', function *(next) {
-    this.body = 'hello koa !'
-});
+const homeAdData = require('./home/ad.js');
+router.get('/api/homead', function *(next) {
+    this.body = homeAdData;
+})
 
-router.get('/api', function *(next) {
-    this.body = 'test data'
-});
-router.get('/api/1', function *(next) {
-    this.body = 'test data 1'
-});
-router.get('/api/2', function *(next) {
-    this.body = {
-        a: 1,
-        b: '123'
-    }
-});
+const homeListData = require('./home/list.js');
+router.get('/api/homelist/:city/:page', function *(next) {
+    const params = this.params;
+    const paramsCity = params.city;
+    const paramsPage = params.page;
 
-router.post('/api/post', koaBody, function *(next) {
-    console.log(this.request.body)
-    this.body = JSON.stringify(this.request.body)
-});
+    console.log('当前城市：' + paramsCity);
+    console.log('当前页面：' + paramsPage);
+
+    this.body = homeListData;
+})
 
 app.use(router.routes())
     .use(router.allowedMethods());
