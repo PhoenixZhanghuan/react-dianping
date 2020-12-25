@@ -3,6 +3,7 @@ import PureRenderMixin from "react-addons-pure-render-mixin";
 import './style.less';
 import {getListData} from "../../../fetch/home/home";
 import ListComponent  from "../../../components/List";
+import LoadMore from "../../../components/LoadMore";
 
 export default class List extends React.Component {
 
@@ -11,7 +12,9 @@ export default class List extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             data: [],
-            hasMore: false
+            hasMore: false,
+            isLoadingMore: false,
+            page: 1
         }
     }
 
@@ -24,6 +27,12 @@ export default class List extends React.Component {
                         ? <ListComponent data={this.state.data} />
                         : <div>加载中...</div>
                 }
+                {
+                    this.state.hasMore
+                        ? <LoadMore isLoadingMore={this.state.isLoadingMore} loadMoreFn={this.loadMoreData.bind(this)}/>
+                        : null
+                }
+
             </div>
         );
     }
@@ -36,6 +45,10 @@ export default class List extends React.Component {
         const { cityName } = this.props
         const result = getListData(cityName, 0)
         this.resultHandle(result);
+    }
+
+    loadMoreData() {
+
     }
 
     resultHandle(result) {
