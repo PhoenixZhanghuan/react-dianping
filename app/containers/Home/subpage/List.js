@@ -2,7 +2,7 @@ import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import './style.less';
 import {getListData} from "../../../fetch/home/home";
-import ListComponent  from "../../../components/List";
+import ListComponent from "../../../components/List";
 import LoadMore from "../../../components/LoadMore";
 
 export default class List extends React.Component {
@@ -24,7 +24,7 @@ export default class List extends React.Component {
                 <h2 className="home-list-title">猜你喜欢</h2>
                 {
                     this.state.data.length
-                        ? <ListComponent data={this.state.data} />
+                        ? <ListComponent data={this.state.data}/>
                         : <div>加载中...</div>
                 }
                 {
@@ -42,13 +42,24 @@ export default class List extends React.Component {
     }
 
     loadFirstPageData() {
-        const { cityName } = this.props
+        const {cityName} = this.props
         const result = getListData(cityName, 0)
         this.resultHandle(result);
     }
 
     loadMoreData() {
+        this.setState({
+            isLoadingMore: true,
+        })
+        const {cityName} = this.props
+        const {page} = this.state;
+        const result = getListData(cityName, page);
+        this.resultHandle(result);
 
+        this.setState({
+            page: page + 1,
+            isLoadingMore: false
+        });
     }
 
     resultHandle(result) {
@@ -60,7 +71,7 @@ export default class List extends React.Component {
 
             this.setState({
                 hasMore,
-                data
+                data: this.state.data.concat(data)
             })
         })
     }
