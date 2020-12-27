@@ -1,6 +1,7 @@
 import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import "./style.less";
+import {debounce} from '../../util/common'
 
 export default class LoadMore extends React.Component {
 
@@ -25,28 +26,25 @@ export default class LoadMore extends React.Component {
     loadMoreHandle() {
         this.props.loadMoreFn();
     }
-    
+
     componentDidMount() {
+        window.addEventListener(
+            'scroll',
+            debounce(this.scrollHandle.bind(this), 50),
+            false);
+    }
+
+    scrollHandle() {
         const {loadMoreFn} = this.props;
         const {wrapper} = this.refs;
-
-        let timeoutId;
-        function callback() {
-            const top = wrapper.getBoundingClientRect().top;
-            const windowHeight = window.screen.height;
-            if(top && top < windowHeight) {
-                loadMoreFn();
-            }
+        if (this.props.isLoadingMore) {
+            return;
         }
-        window.addEventListener('scroll',  ()  =>  {
-            if(this.props.isLoadingMore) {
-                return;
-            }
-            if(timeoutId) {
-                clearTimeout(timeoutId)
-            }
-            timeoutId = setTimeout(callback, 50);
-        }, false)
+        const top = wrapper && wrapper.getBoundingClientRect().top;
+        const windowHeight = window.screen.height;
+        if (top && top < windowHeight) {
+            loadMoreFn && loadMoreFn();
+        }
     }
 
 }
