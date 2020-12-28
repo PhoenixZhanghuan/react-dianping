@@ -1,7 +1,6 @@
 import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import './style.less';
-import {hashHistory} from "react-router";
 
 export default class SearchInput extends React.Component {
 
