@@ -2,6 +2,7 @@ import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import './style.less';
 import Item from "./item";
+import {Link} from "react-router";
 
 export default class List extends React.Component {
 
@@ -17,7 +18,9 @@ export default class List extends React.Component {
                 {
                     data.map((item, index) => {
                         return (
-                            <Item key={item.title + index} data={item}/>
+                            <Link key={item.title + index}  to={'/detail/' + data.id} onlyActiveOnIndex>
+                                <Item data={item}/>
+                            </Link>
                         )
                     })
                 }

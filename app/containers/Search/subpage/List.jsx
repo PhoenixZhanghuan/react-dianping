@@ -2,7 +2,7 @@ import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
 
-import ListCompoent from '../../../components/List'
+import ListComponent from '../../../components/List'
 import LoadMore from '../../../components/LoadMore'
 
 import { getSearchData } from '../../../fetch/search/search'
@@ -26,7 +26,7 @@ class SearchList extends React.Component {
             <div>
                 {
                     this.state.data.length
-                        ? <ListCompoent data={this.state.data}/>
+                        ? <ListComponent data={this.state.data}/>
                         : <div>{/* 加载中... */}</div>
                 }
                 {
