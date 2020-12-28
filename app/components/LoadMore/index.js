@@ -35,9 +35,9 @@ export default class LoadMore extends React.Component {
     }
 
     scrollHandle() {
-        const {loadMoreFn} = this.props;
+        const {loadMoreFn, isLoadingMore} = this.props;
         const {wrapper} = this.refs;
-        if (this.props.isLoadingMore) {
+        if (isLoadingMore) {
             return;
         }
         const top = wrapper && wrapper.getBoundingClientRect().top;
