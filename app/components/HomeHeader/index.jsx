@@ -25,7 +25,9 @@ export default class HomeHeader extends React.Component {
                     </Link>
                 </div>
                 <div className="home-header-right float-right">
-                    <i className="icon-user"/>
+                    <Link to="/Login" onlyActiveOnIndex>
+                        <i className="icon-user"/>
+                    </Link>
                 </div>
                 <div className="home-header-middle">
                     <div className="search-container">
