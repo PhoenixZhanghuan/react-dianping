@@ -1,5 +1,5 @@
-const app = require('koa')();
-const router = require('koa-router')();
+var app = require('koa')();
+var router = require('koa-router')();
 
 // router.get('/', function *(next) {
 //     this.body = 'hello koa !'
@@ -10,14 +10,18 @@ const router = require('koa-router')();
 // });
 
 // 首页 —— 广告（超值特惠）
-const homeAdData = require('./home/ad.js');
+var homeAdData = require('./home/ad.js')
 router.get('/api/homead', function *(next) {
+    console.log('首页 —— 广告（超值特惠）')
+
     this.body = homeAdData
 });
 
 // 首页 —— 推荐列表（猜你喜欢）
-const homeListData = require('./home/list.js');
+var homeListData = require('./home/list.js')
 router.get('/api/homelist/:city/:page', function *(next) {
+    console.log('首页 —— 推荐列表（猜你喜欢）')
+
     // 参数
     const params = this.params
     const paramsCity = params.city
@@ -30,8 +34,10 @@ router.get('/api/homelist/:city/:page', function *(next) {
 });
 
 // 搜索结果页 - 搜索结果 - 三个参数
-const searchListData = require('./search/list.js');
+var searchListData = require('./search/list.js')
 router.get('/api/search/:page/:city/:category/:keyword', function *(next) {
+    console.log('搜索结果页 - 搜索结果')
+
     // 参数
     const params = this.params
     const paramsPage = params.page
@@ -48,6 +54,8 @@ router.get('/api/search/:page/:city/:category/:keyword', function *(next) {
 })
 // 搜索结果页 - 搜索结果 - 两个参数
 router.get('/api/search/:page/:city/:category', function *(next) {
+    console.log('搜索结果页 - 搜索结果')
+
     // 参数
     const params = this.params
     const paramsPage = params.page
@@ -73,7 +81,6 @@ router.get('/api/detail/info/:id', function *(next) {
 
     this.body = detailInfo
 })
-
 // 详情页 - 用户评论
 const detailComment = require('./detail/comment.js')
 router.get('/api/detail/comment/:page/:id', function *(next) {

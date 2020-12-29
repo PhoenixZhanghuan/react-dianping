@@ -18,7 +18,7 @@ export default class List extends React.Component {
                 {
                     data.map((item, index) => {
                         return (
-                            <Link key={item.title + index}  to={'/detail/' + data.id} onlyActiveOnIndex>
+                            <Link key={item.title + index}  to={'/detail/' + item.id} onlyActiveOnIndex>
                                 <Item data={item}/>
                             </Link>
                         )
