@@ -1,10 +1,10 @@
 import React from 'react';
 import PureRenderMixin from "react-addons-pure-render-mixin";
 import {bindActionCreators} from "redux";
-import * as userInfoActionsFromOtherFile from "../../../actions/userinfo";
 import {connect} from "react-redux";
 import BuyAndStore from "../../../components/BuyAndStore";
 import hashHistory from "react-router/lib/hashHistory";
+import * as storeActionsFromFile from '../../../actions/store';
 
 class Buy extends React.Component {
 
@@ -19,7 +19,10 @@ class Buy extends React.Component {
     render() {
         return (
             <div>
-                <BuyAndStore  isStore={this.state.isStore} buyHandle={this.buyHandle.bind(this)} storeHandle={this.storeHandle.bind(this)}/>
+                <BuyAndStore
+                    isStore={this.state.isStore}
+                    buyHandle={this.buyHandle.bind(this)}
+                    storeHandle={this.storeHandle.bind(this)}/>
             </div>
         );
     }
@@ -34,6 +37,23 @@ class Buy extends React.Component {
     }
 
     storeHandle() {
+        const loginFlag = this.loginCheck();
+        if(!loginFlag) {
+            return;
+        }
+
+        const {id} = this.props;
+        const {storeActions} = this.props;
+
+        if(this.state.isStore) {
+            storeActions.rm({id : id})
+        }else {
+            storeActions.add({id : id})
+        }
+
+        this.setState({
+            isStore: !this.state.isStore
+        })
 
     }
 
@@ -42,10 +62,28 @@ class Buy extends React.Component {
         const {userinfo} = this.props;
 
         if(!userinfo.username) {
-            hashHistory.push('/Login/' + encodeURIComponent('/detail/') + id);
+            hashHistory.push('/Login/' + encodeURIComponent('/detail/' + id));
             return false;
         }
         return true;
+    }
+
+    componentDidMount() {
+        this.checkStoreState()
+    }
+
+    checkStoreState() {
+        const {id} = this.props;
+        const {store} = this.props;
+
+        store.some(item => {
+            if(item.id === id) {
+                this.setState({
+                    isStore: true
+                })
+                return true;
+            }
+        })
     }
 
 }
@@ -54,12 +92,13 @@ class Buy extends React.Component {
 function mapStateToProps(state) {
     return {
         userinfo: state.userinfo,
+        store: state.store
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        userInfoActions : bindActionCreators(userInfoActionsFromOtherFile, dispatch)
+        storeActions: bindActionCreators(storeActionsFromFile, dispatch)
     }
 }
 
