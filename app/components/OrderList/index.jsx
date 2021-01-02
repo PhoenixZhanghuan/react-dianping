@@ -11,12 +11,12 @@ class OrderList extends React.Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
     render() {
-        const data = this.props.data
+        const {data, submitComment} = this.props;
 
         return (
             <div>
                 {data.map((item, index) => {
-                    return <Item key={index} data={item}/>
+                    return <Item key={index} data={item} submitComment={submitComment}/>
                 })}
             </div>
         )
